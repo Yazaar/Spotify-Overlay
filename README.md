@@ -1,6 +1,7 @@
 # Spotify-API
 
 <h3>Setup guide:</h3>
+<strong><em>The app is already deleted, no need to try using my Client ID and Client Secret!</em></strong><br>
 First of all, <a href="#">download</a> the files (not available yet)<br><br>
 
 When your files are downloaded, head over to <a href="https://developer.spotify.com/dashboard">this</a> spotify website and login to your account (your normal spotify account)
@@ -29,7 +30,7 @@ You should now see something like this, copy your Client ID
 Open up API_Settings.txt and paste your Client ID here.
 <img src="https://github.com/Yazaar/Project-Assets/blob/master/SpotifyAPI/Step7.jpg?raw=true" alt="Step 7" width="1000">
 
-Head back to the spotify website and click "SHOW CLIENT SECRET", do not copy it yet.
+Head back to the spotify website and click "SHOW CLIENT SECRET", do not copy it yet. <strong>Do not show the Client Secret to anyone, handle it like a password!</strong>
 <img src="https://github.com/Yazaar/Project-Assets/blob/master/SpotifyAPI/Step8.jpg?raw=true" alt="Step 8" width="1000">
 
 1: Open up <a href="https://www.base64encode.org/">this</a> URL<br>
