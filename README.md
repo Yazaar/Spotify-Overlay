@@ -30,7 +30,7 @@ You should now see something like this, copy your Client ID
 Open up API_Settings.txt and paste your Client ID here.
 <img src="https://github.com/Yazaar/Project-Assets/blob/master/SpotifyAPI/Step7.jpg?raw=true" alt="Step 7" width="1000">
 
-Head back to the spotify website and click "SHOW CLIENT SECRET", do not copy it yet. <strong>Do not show the Client Secret to anyone, handle it like a password!</strong>
+Head back to the spotify website and click "SHOW CLIENT SECRET", do not copy it yet. <strong>Do not show the Client Secret to anyone, handle it like a password! If leaked, click reset to get a new one and redo the steps!</strong>
 <img src="https://github.com/Yazaar/Project-Assets/blob/master/SpotifyAPI/Step8.jpg?raw=true" alt="Step 8" width="1000">
 
 1: Open up <a href="https://www.base64encode.org/">this</a> URL<br>
