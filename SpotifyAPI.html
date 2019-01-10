@@ -160,9 +160,11 @@
             xml.onreadystatechange = function () {
                 if (xml.readyState == 4) {
                     if (xml.status >= 200 && xml.status < 300) {
-                        SpotifyData = JSON.parse(xml.response)
+                        if (xml.response.length != 0){
+                            SpotifyData = JSON.parse(xml.response)
+                            ReloadScreenData()
+                        }
                         setTimeout(UpdateAPI, LoopMS)
-                        ReloadScreenData()
                     } else {
                         setTimeout(UpdateAPI, LoopMS)
                         console.log("[ERROR xml] Try to launch SpotifyAPI.exe to get authorized if this repeats.")
