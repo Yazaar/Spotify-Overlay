@@ -12,7 +12,7 @@ If you want to output artists and song in text files:
 If you want the overlay:
   Run SpotifyAPI.exe (only if first time ever)
   Run SpotifyAPI.html (open it up in OBS, or in a browser)
-  If no music pops up when playing, run SpotifyAPI.exe again.
+  If no music pops up when playing, run SpotifyAPI.exe again. (Try to refresh browser/remove cache first...)
 
 (you might be able to run both at the same time, but not a promise.
  Feel free to try, it will not break the software)
