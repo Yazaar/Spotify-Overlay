@@ -2,7 +2,7 @@
 
 <h3>Setup guide:</h3>
 <strong><em>The app is already deleted, no need to try using my Client ID and Client Secret!</em></strong><br>
-First of all, <a href="#">download</a> the files (not available yet)<br><br>
+First of all, <a href="https://github.com/Yazaar/Spotify-API/archive/master.zip">download</a> the files<br><br>
 
 When your files are downloaded, head over to <a href="https://developer.spotify.com/dashboard">this</a> spotify website and login to your account (your normal spotify account)
 <img src="https://github.com/Yazaar/Project-Assets/blob/master/SpotifyAPI/Step1.jpg?raw=true" alt="Step 1" width="1000">
