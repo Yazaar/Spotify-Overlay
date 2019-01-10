@@ -1,0 +1,5 @@
+Update with spotify interval (seconds):
+2
+
+Add at the end of each text document (For example spaces which leads to free space when scroll filter is turned on) Type whatever you want inside of the quotes:
+"    "

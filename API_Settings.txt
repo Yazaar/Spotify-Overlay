@@ -1,0 +1,10 @@
+Please do not remove or add lines to this document, that would harm the software.
+
+Client ID:
+Paste your client ID here.
+
+Client Secret:
+Paste your Client Secret here.
+
+Redirect URI:
+Paste your Redirect URI here.

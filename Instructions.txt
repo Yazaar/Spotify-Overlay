@@ -1,0 +1,40 @@
+Welcome to a Spotify API by Yazaar :)
+
+How to get started:
+Follow my guide with images here: https://github.com/Yazaar/Spotify-API
+
+When all one time setups are complete:
+
+If you want to output artists and song in text files:
+  Run SpotifyAPI_to_text.exe
+  Both text files can be found inside the folder to_text_data, open them up in OBS.
+
+If you want the overlay:
+  Run SpotifyAPI.exe (only if first time ever)
+  Run SpotifyAPI.html (open it up in OBS, or in a browser)
+  If no music pops up when playing, run SpotifyAPI.exe again.
+
+(you might be able to run both at the same time, but not a promise.
+ Feel free to try, it will not break the software)
+
+Change advanced settings:
+
+For text files:
+  Open "to_text_settings.txt"
+
+  Line 2 is how often you check for a new track and artist in seconds. Feel free to change,
+  but too low leads to spotify rejecting you because of too many requests.
+
+  Line 5 is what will be addad at the end of the artist name and at the end of the song name
+  (spaces leads to more free space in OBS when using scroll filter on text)
+
+For overlay (on your own risk):
+  Edit SpotifyAPI.html
+  
+  Change update data interval:
+    find "let LoopMS", you should see "let LoopMS = 2000" and that is how often the overlay updates in milliseconds.
+    do not change it to something too low (spotify will reject you if too many requests)
+  
+  Change colors:
+    find "/* COLOR SETTINGS WITH MORE, UPDATES EACH TIME IT'S A NEW TRACK. FEEL FREE TO EDIT IF YOU KNOW WHAT YOU ARE DOING */"
+    This is really advanced.

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Yazaar Spotify API</title>
+
+    <script src="key.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/all.js" integrity="sha384-EIHISlAOj4zgYieurP0SdoiBYfGJKkgWedPHH4jCzpCXLmzVsw1ouK59MuUtP4a1" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+    <style>
+
+        * {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        #container {
+            position: relative;
+            border: #000000 solid 5px;
+            display: inline-flex;
+            width: 900px;
+            background: #000000b7;
+        }
+
+        #AlbumImage {
+            position: relative;
+            width: 250px;
+            height: 250px;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .fa-pause-circle {
+            position: absolute;
+            font-size: 200px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #duration {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 10px;
+            width: 0%;
+        }
+
+        #right{
+            flex: 1;
+        }
+
+        #track {
+            font-size: 35px;
+            margin: 15px;
+            color: #eeeeee;
+        }
+
+        #artist {
+            font-size: 30px;
+            margin: 15px;
+            color: #eeeeee;
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <div id="container">
+        <div id="AlbumImage">
+            <i class="far fa-pause-circle" id="pauseicon"></i>
+        </div>
+        <div id="right">
+            <article id="track">Please start spotify</article>
+            <article id="artist">Waiting for spotify input</article>
+        </div>
+        <div id="duration"></div>
+    </div>
+
+
+
+    <script>
+        let LoopMS = 2000
+
+        let secret = "Bearer " + API_Key.access_token
+        let timestamp = 0
+        let SpotifyData
+        let xml
+        let xml2
+        let current_song = ""
+        let RandomColor
+
+        function ReloadScreenData(){
+            if(SpotifyData.is_playing) {
+                document.getElementById("pauseicon").style.opacity = 0;
+            } else {
+                document.getElementById("pauseicon").style.opacity = 0.75;
+            }
+
+            if (SpotifyData.currently_playing_type == "track" && SpotifyData.item.name != current_song){
+
+                /* COLOR SETTINGS WITH MORE, UPDATES EACH TIME IT'S A NEW TRACK. FEEL FREE TO EDIT IF YOU KNOW WHAT YOU ARE DOING */
+                RandomColor = "rgb("+Math.floor(Math.random() * 256)+", "+Math.floor(Math.random() * 256)+", "+Math.floor(Math.random() * 256)+")"
+                current_song = SpotifyData.item.name
+                document.getElementById("AlbumImage").style.backgroundImage = "url("+SpotifyData.item.album.images[1].url+")"
+                document.getElementById("duration").style.background = RandomColor
+                document.getElementById("pauseicon").style.color = RandomColor
+                document.getElementById("track").innerHTML = SpotifyData.item.name
+                document.getElementById("artist").innerHTML = ""
+                /* COLOR SETTINGS WITH MORE, UPDATES EACH TIME IT'S A NEW TRACK. FEEL FREE TO EDIT IF YOU KNOW WHAT YOU ARE DOING */
+
+                for (i in SpotifyData.item.artists) {
+                    SpotifyData.item.artists[i].name
+                    if (document.getElementById("artist").innerHTML == ""){
+                        document.getElementById("artist").innerHTML = SpotifyData.item.artists[i].name
+                    } else {
+                        document.getElementById("artist").innerHTML = document.getElementById("artist").innerHTML + ", " + SpotifyData.item.artists[i].name
+                    }
+                }
+
+
+
+                document.getElementById("AlbumImage").style.height = "250px"
+                document.getElementById("AlbumImage").style.height = document.getElementById("container").clientHeight + "px"
+            }
+                if (SpotifyData.currently_playing_type == "track") {
+                    document.getElementById("duration").style.width = SpotifyData.progress_ms / SpotifyData.item.duration_ms * 100 + "%"
+                }
+        }
+
+        function UpdateAPI(){
+            if (Date.now() > timestamp) {
+                timestamp = Date.now() + 1200000
+
+                xml2 = new XMLHttpRequest()
+
+                xml2.onreadystatechange = function () {
+                    if (xml2.readyState == 4) {
+                        if (xml2.status >= 200 && xml2.status < 300 ) {
+                            secret = "Bearer "+JSON.parse(xml2.response).access_token
+                        } else {
+                            console.log("[ERROR xml2] Try to launch SpotifyAPI.exe to get authorized")
+                        }
+                    }
+                }
+
+                xml2.open('get', 'http://yazaar.pythonanywhere.com/spotifyAPI/'+API_Key.refresh_token+'/'+API_Basic, false)
+                xml2.send()
+            }
+            
+            xml = new XMLHttpRequest()
+            xml.onreadystatechange = function () {
+                if (xml.readyState == 4) {
+                    if (xml.status >= 200 && xml.status < 300) {
+                        SpotifyData = JSON.parse(xml.response)
+                        setTimeout(UpdateAPI, LoopMS)
+                        ReloadScreenData()
+                    } else {
+                        setTimeout(UpdateAPI, LoopMS)
+                        console.log("[ERROR xml] Try to launch SpotifyAPI.exe to get authorized if this repeats.")
+                    }
+                }
+            }
+
+        xml.open('get', 'https://api.spotify.com/v1/me/player/currently-playing', true)
+        xml.setRequestHeader("Authorization", secret)
+        xml.send()
+    }
+
+        UpdateAPI()
+
+    </script>
+
+</body>
+</html>
