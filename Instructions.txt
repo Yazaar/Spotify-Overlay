@@ -11,7 +11,7 @@ If you want to output artists and song in text files:
 
 If you want the overlay:
   Run SpotifyAPI.exe (only if first time ever)
-  Run SpotifyAPI.html (open it up in OBS, or in a browser)
+  Run SpotifyAPI.html or SpotifyAPI_Slim.html  (open it up in OBS, or in a browser)
   If no music pops up when playing, run SpotifyAPI.exe again. (Try to refresh browser/remove cache first...)
 
 (you might be able to run both at the same time, but not a promise.
@@ -28,13 +28,25 @@ For text files:
   Line 5 is what will be addad at the end of the artist name and at the end of the song name
   (spaces leads to more free space in OBS when using scroll filter on text)
 
-For overlay (on your own risk):
-  Edit SpotifyAPI.html
-  
-  Change update data interval:
-    find "let LoopMS", you should see "let LoopMS = 2000" and that is how often the overlay updates in milliseconds.
-    do not change it to something too low (spotify will reject you if too many requests)
-  
-  Change colors:
-    find "/* COLOR SETTINGS WITH MORE, UPDATES EACH TIME IT'S A NEW TRACK. FEEL FREE TO EDIT IF YOU KNOW WHAT YOU ARE DOING */"
-    This is really advanced.
+For overlay:
+  Edit SpotifyAPI_Slim.html:
+    Open dimensions.js
+
+    Edit Width/Height:
+      Change OverlayHeight or OverlayWidth to whatever px (pixels) you want
+    
+    Edit font size:
+      Change FontSizeDiff, higher number --> larger track font + smaller artist font
+    
+    Edit speed of ticker:
+      Change PixelsPerSecond (Yeah, the amount of pixels it moves per second. Higher = Faster)
+
+
+  Edit SpotifyAPI.html (on your own risk):
+    Change update data interval:
+      find "let LoopMS", you should see "let LoopMS = 2000" and that is how often the overlay updates in milliseconds.
+      do not change it to something too low (spotify will reject you if too many requests)
+    
+    Change colors:
+      find "/* COLOR SETTINGS WITH MORE, UPDATES EACH TIME IT'S A NEW TRACK. FEEL FREE TO EDIT IF YOU KNOW WHAT YOU ARE DOING */"
+      This is really advanced.
