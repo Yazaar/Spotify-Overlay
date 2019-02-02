@@ -36,13 +36,12 @@
             display: inline-flex;
             width: var(--WidgetWidth);
             background: #000000b7;
-            padding-bottom: calc(var(--WidgetHeight) * 0.07);
         }
 
         #AlbumImage {
             position: relative;
             width: var(--WidgetHeight);
-            height: calc(var(--WidgetHeight) + calc(var(--WidgetHeight) * 0.07));
+            height: var(--WidgetHeight);
             background-size: cover;
             background-repeat: no-repeat;
         }
@@ -59,7 +58,7 @@
             position: absolute;
             left: 0;
             bottom: 0;
-            height: calc(var(--WidgetHeight) * 0.07);
+            height: calc(var(--WidgetHeight) * 0.1);
             width: 0%;
         }
 
@@ -71,7 +70,7 @@
         #track {
             display: inline-block;
             /*font-size: calc(var(--WidgetHeight) * 0.4);*/
-            padding: calc(var(--WidgetHeight) * 0.06);
+            padding: calc(var(--WidgetHeight) * 0.05);
             color: #eeeeee;
             white-space: nowrap;
         }
@@ -139,7 +138,7 @@
         let RandomColor
 
         document.getElementById("container").style.height = OverlayHeight
-
+        
         document.documentElement.style.setProperty("--WidgetHeight", OverlayHeight)
         document.documentElement.style.setProperty("--WidgetWidth", OverlayWidth)
         document.documentElement.style.setProperty("--RightWidth", document.getElementById('right').offsetWidth + "px")
@@ -150,12 +149,12 @@
         document.getElementById('artist').style.fontSize = OverlayHeightNum * 0.3 * (1 - FontSizeDiff) + "px"
         document.getElementById('track').style.fontSize = OverlayHeightNum * 0.3 * (1 + FontSizeDiff) + "px"
 
+
         if (FontSizeDiff == -1){
             document.getElementById("trackrail").style.display = "none"
         } else if (FontSizeDiff == 1) {
             document.getElementById("artistrail").style.display = "none"
         }
-
 
         function AskNewToken() {
             document.getElementById("artist").innerHTML = "Invalid spotify token"
@@ -178,6 +177,7 @@
 
 
         function ReloadScreenData(){
+            
             if(SpotifyData.is_playing) {
                 document.getElementById("pauseicon").style.opacity = 0;
             } else {
@@ -220,9 +220,11 @@
                 document.getElementById('artist').style.animation = "unset"
             }
 
+            
             if (SpotifyData.currently_playing_type == "track") {
                 document.getElementById("duration").style.width = SpotifyData.progress_ms / SpotifyData.item.duration_ms * 100 + "%"
             }
+
         }
 
         function UpdateAPI(){
