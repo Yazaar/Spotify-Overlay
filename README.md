@@ -1,6 +1,16 @@
 # Spotify-API
+<h3>Setup guide (cloud edition, new version)</h3>
+Using the Spotify-API might be hard on softwares like SLOBS (Streamlabs OBS) which does not include "interact" when rightclicking a browser source. This function is at least included in OBS Studio and OBS.live.<br><br>
 
-<h3>Setup guide:</h3>
+This is the URL for the overlay, open it up as a browser source if your software includes interact. Use the interact function by rightclicking on your browser source to login on your spotify account, I would recommend to drag the browser source out of the streams view while typing in your cridentials. You may exit the interact function when the login process is completed.
+<h2>https://yazaar.github.io/Spotify-API</h2>
+
+This URL can be used for the ones who does not have a software which includes interact, open it up in your standard browser. Login to your spotify account which you would like to track and wait to get redirected. A URL should pop up on your browser, copy it and paste it into your browser source. Repeat this process when required, PROBABLY once a day when you startup the stream.
+<h2>https://yazaar.github.io/Spotify-API/setup.html</h2>
+
+
+<br><br><br>
+<h3>Setup guide (download edition, old version):</h3>
 <strong><em>The app is already deleted, no need to try using my Client ID and Client Secret!</em></strong><br>
 First of all, <a href="https://github.com/Yazaar/Spotify-API/archive/master.zip">download</a> the files<br><br>
 
