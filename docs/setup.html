@@ -38,7 +38,7 @@
             window.location = 'http://yazaar.pythonanywhere.com/spotifyAPI/request/' + encodeURIComponent(encodeURIComponent(window.location.origin + window.location.pathname)) + '/user-read-currently-playing'
         }
 
-        document.getElementById("InputURL").innerHTML = window.location.href.replace(window.location.pathname, "")
+        document.getElementById("InputURL").innerHTML = window.location.href.replace("/setup.html", "")
         
     </script>
 </body>
