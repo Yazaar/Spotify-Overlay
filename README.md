@@ -8,6 +8,9 @@ This is the URL for the overlay, open it up as a browser source if your software
 This URL can be used for the ones who does not have a software which includes interact, open it up in your standard browser. Login to your spotify account which you would like to track and wait to get redirected. A URL should pop up on your browser, copy it and paste it into your browser source. Repeat this process when required, PROBABLY once a day when you startup the stream.
 <h2>https://yazaar.github.io/Spotify-API/setup.html</h2>
 
+Choose the width and height of the browser source to your liking.<br>
+Higher = smaller spotify time-ticker
+Wider = more text displayed at once
 
 <br><br><br>
 <h3>Setup guide (download edition, old version):</h3>
