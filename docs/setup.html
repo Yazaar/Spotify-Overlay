@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Spotify API | Setup</title>
+    <style>
+        body {
+            margin: 0;
+            background: #303030;
+        }
+
+        h1 {
+            text-align: center;
+            color: #aaaaaa;
+        }
+
+        #InputURL {
+            box-sizing: border-box;
+            padding: 1rem .5rem;
+            text-align: center;
+            background: #aaaaaa;
+            word-wrap: break-word;
+            font-size: 1.2rem;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Copy this URL and paste it into your browser overlay:</h1>
+    <p id="InputURL"></p>
+    <script>
+        
+        let url_params = new URLSearchParams(window.location.search)
+
+        if (typeof url_params.get("access_token") != "string" && typeof url_params.get("refresh_token") != "string" && window.location.hash == ""){
+            window.location = "http://yazaar.pythonanywhere.com/spotifyAPI/request/" + encodeURIComponent(encodeURIComponent(window.location.origin + window.location.pathname))
+        }
+
+        document.getElementById("InputURL").innerHTML = window.location.href.replace(window.location.pathname, "/spotifyAPI.html")
+        
+    </script>
+</body>
+</html>
