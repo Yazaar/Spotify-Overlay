@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,12 +9,14 @@
 
     <script src="key.js"></script>
     <script src="dimensions.js"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/all.js" integrity="sha384-EIHISlAOj4zgYieurP0SdoiBYfGJKkgWedPHH4jCzpCXLmzVsw1ouK59MuUtP4a1" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+        integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/all.js"
+        integrity="sha384-EIHISlAOj4zgYieurP0SdoiBYfGJKkgWedPHH4jCzpCXLmzVsw1ouK59MuUtP4a1" crossorigin="anonymous">
+    </script>
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
     <style>
-
         :root {
             --RightWidth: 0px;
             --TrackWidth: 0px;
@@ -62,7 +65,7 @@
             width: 0%;
         }
 
-        #right{
+        #right {
             flex: 1;
             overflow: hidden;
         }
@@ -84,29 +87,36 @@
         }
 
         @keyframes TrackTicker {
-            0%, 20%, 100% {
+
+            0%,
+            20%,
+            100% {
                 margin-left: 0px;
             }
 
-            80%, 99% {
+            80%,
+            99% {
                 margin-left: calc(calc(var(--TrackWidth) * -1) + var(--RightWidth));
             }
         }
 
         @keyframes ArtistTicker {
-            0%, 20%, 100% {
+
+            0%,
+            20%,
+            100% {
                 margin-left: 0px;
             }
 
-            80%, 99% {
+            80%,
+            99% {
                 margin-left: calc(calc(var(--ArtistWidth) * -1) + var(--RightWidth));
             }
         }
-
-
     </style>
 
 </head>
+
 <body>
 
     <div id="container">
@@ -137,8 +147,11 @@
         let current_song = ""
         let RandomColor
 
+        let global_identifier = 0
+        let time_since_loop = new Date()
+
         document.getElementById("container").style.height = OverlayHeight
-        
+
         document.documentElement.style.setProperty("--WidgetHeight", OverlayHeight)
         document.documentElement.style.setProperty("--WidgetWidth", OverlayWidth)
         document.documentElement.style.setProperty("--RightWidth", document.getElementById('right').offsetWidth + "px")
@@ -150,7 +163,7 @@
         document.getElementById('track').style.fontSize = OverlayHeightNum * 0.3 * (1 + FontSizeDiff) + "px"
 
 
-        if (FontSizeDiff == -1){
+        if (FontSizeDiff == -1) {
             document.getElementById("trackrail").style.display = "none"
         } else if (FontSizeDiff == 1) {
             document.getElementById("artistrail").style.display = "none"
@@ -161,35 +174,41 @@
             document.getElementById("track").innerHTML = "Please launch SpotifyAPI.exe"
 
             if (document.getElementById('track').offsetWidth > document.getElementById('right').offsetWidth) {
-                document.documentElement.style.setProperty("--TrackWidth", document.getElementById('track').offsetWidth + "px")
-                document.getElementById('track').style.animation = "TrackTicker "+ (document.getElementById("track").offsetWidth / PixelsPerSecond) +"s linear infinite"
+                document.documentElement.style.setProperty("--TrackWidth", document.getElementById('track')
+                    .offsetWidth + "px")
+                document.getElementById('track').style.animation = "TrackTicker " + (document.getElementById("track")
+                    .offsetWidth / PixelsPerSecond) + "s linear infinite"
             } else {
                 document.getElementById('track').style.animation = "unset"
             }
 
             if (document.getElementById('artist').offsetWidth > document.getElementById('right').offsetWidth) {
-                document.documentElement.style.setProperty("--ArtistWidth", document.getElementById('artist').offsetWidth + "px")
-                document.getElementById('artist').style.animation = "ArtistTicker "+ (document.getElementById("artist").offsetWidth / PixelsPerSecond) +"s linear infinite"
+                document.documentElement.style.setProperty("--ArtistWidth", document.getElementById('artist')
+                    .offsetWidth + "px")
+                document.getElementById('artist').style.animation = "ArtistTicker " + (document.getElementById("artist")
+                    .offsetWidth / PixelsPerSecond) + "s linear infinite"
             } else {
                 document.getElementById('artist').style.animation = "unset"
             }
         }
 
 
-        function ReloadScreenData(){
-            
-            if(SpotifyData.is_playing) {
+        function ReloadScreenData() {
+
+            if (SpotifyData.is_playing) {
                 document.getElementById("pauseicon").style.opacity = 0;
             } else {
                 document.getElementById("pauseicon").style.opacity = 0.75;
             }
 
-            if (SpotifyData.currently_playing_type == "track" && SpotifyData.item.name != current_song){
+            if (SpotifyData.currently_playing_type == "track" && SpotifyData.item.name != current_song) {
 
                 /* COLOR SETTINGS WITH MORE, UPDATES EACH TIME IT'S A NEW TRACK. FEEL FREE TO EDIT IF YOU KNOW WHAT YOU ARE DOING */
-                RandomColor = "rgb("+Math.floor(Math.random() * 256)+", "+Math.floor(Math.random() * 256)+", "+Math.floor(Math.random() * 256)+")"
+                RandomColor = "rgb(" + Math.floor(Math.random() * 256) + ", " + Math.floor(Math.random() * 256) + ", " +
+                    Math.floor(Math.random() * 256) + ")"
                 current_song = SpotifyData.item.name
-                document.getElementById("AlbumImage").style.backgroundImage = "url("+SpotifyData.item.album.images[1].url+")"
+                document.getElementById("AlbumImage").style.backgroundImage = "url(" + SpotifyData.item.album.images[1]
+                    .url + ")"
                 document.getElementById("duration").style.background = RandomColor
                 document.getElementById("pauseicon").style.color = RandomColor
                 document.getElementById("track").innerHTML = SpotifyData.item.name
@@ -198,36 +217,46 @@
 
                 for (i in SpotifyData.item.artists) {
                     SpotifyData.item.artists[i].name
-                    if (document.getElementById("artist").innerHTML == ""){
+                    if (document.getElementById("artist").innerHTML == "") {
                         document.getElementById("artist").innerHTML = SpotifyData.item.artists[i].name
                     } else {
-                        document.getElementById("artist").innerHTML = document.getElementById("artist").innerHTML + ", " + SpotifyData.item.artists[i].name
+                        document.getElementById("artist").innerHTML = document.getElementById("artist").innerHTML +
+                            ", " + SpotifyData.item.artists[i].name
                     }
-                }    
+                }
             }
 
             if (document.getElementById('track').offsetWidth > document.getElementById('right').offsetWidth) {
-                document.documentElement.style.setProperty("--TrackWidth", document.getElementById('track').offsetWidth + "px")
-                document.getElementById('track').style.animation = "TrackTicker "+ (document.getElementById("track").offsetWidth / PixelsPerSecond) +"s linear infinite"
+                document.documentElement.style.setProperty("--TrackWidth", document.getElementById('track')
+                    .offsetWidth + "px")
+                document.getElementById('track').style.animation = "TrackTicker " + (document.getElementById("track")
+                    .offsetWidth / PixelsPerSecond) + "s linear infinite"
             } else {
                 document.getElementById('track').style.animation = "unset"
             }
 
             if (document.getElementById('artist').offsetWidth > document.getElementById('right').offsetWidth) {
-                document.documentElement.style.setProperty("--ArtistWidth", document.getElementById('artist').offsetWidth + "px")
-                document.getElementById('artist').style.animation = "ArtistTicker "+ (document.getElementById("artist").offsetWidth / PixelsPerSecond) +"s linear infinite"
+                document.documentElement.style.setProperty("--ArtistWidth", document.getElementById('artist')
+                    .offsetWidth + "px")
+                document.getElementById('artist').style.animation = "ArtistTicker " + (document.getElementById("artist")
+                    .offsetWidth / PixelsPerSecond) + "s linear infinite"
             } else {
                 document.getElementById('artist').style.animation = "unset"
             }
 
-            
+
             if (SpotifyData.currently_playing_type == "track") {
-                document.getElementById("duration").style.width = SpotifyData.progress_ms / SpotifyData.item.duration_ms * 100 + "%"
+                document.getElementById("duration").style.width = SpotifyData.progress_ms / SpotifyData.item
+                    .duration_ms * 100 + "%"
             }
 
         }
 
-        function UpdateAPI(){
+        function UpdateAPI(local_identifier) {
+            time_since_loop = new Date()
+            if (local_identifier !== global_identifier) {
+                return
+            }
             if (Date.now() > timestamp) {
                 timestamp = Date.now() + 1200000
 
@@ -235,8 +264,8 @@
 
                 xml2.onreadystatechange = function () {
                     if (xml2.readyState == 4) {
-                        if (xml2.status >= 200 && xml2.status < 300 ) {
-                            secret = "Bearer "+JSON.parse(xml2.response).access_token
+                        if (xml2.status >= 200 && xml2.status < 300) {
+                            secret = "Bearer " + JSON.parse(xml2.response).access_token
                         } else {
                             console.log("[ERROR xml2] Try to launch SpotifyAPI.exe to get authorized")
                             AskNewToken()
@@ -244,35 +273,48 @@
                     }
                 }
 
-                xml2.open('get', 'http://yazaar.pythonanywhere.com/spotifyAPI/'+API_Key.refresh_token+'/'+API_Basic, false)
+                xml2.open('get', 'http://yazaar.pythonanywhere.com/spotifyAPI/' + API_Key.refresh_token + '/' +
+                    API_Basic, false)
                 xml2.send()
             }
-            
+
             xml = new XMLHttpRequest()
             xml.onreadystatechange = function () {
                 if (xml.readyState == 4) {
                     if (xml.status >= 200 && xml.status < 300) {
-                        if (xml.response.length != 0){
+                        if (xml.response.length != 0) {
                             SpotifyData = JSON.parse(xml.response)
                             ReloadScreenData()
                         }
-                        setTimeout(UpdateAPI, LoopMS)
+                        setTimeout(function () {
+                            UpdateAPI(local_identifier)
+                        }, LoopMS)
                     } else {
-                        setTimeout(UpdateAPI, LoopMS)
+                        setTimeout(function () {
+                            UpdateAPI(local_identifier)
+                        }, LoopMS)
                         console.log("[ERROR xml] Try to launch SpotifyAPI.exe to get authorized if this repeats.")
                         AskNewToken()
                     }
                 }
             }
 
-        xml.open('get', 'https://api.spotify.com/v1/me/player/currently-playing', true)
-        xml.setRequestHeader("Authorization", secret)
-        xml.send()
-    }
+            xml.open('get', 'https://api.spotify.com/v1/me/player/currently-playing', true)
+            xml.setRequestHeader("Authorization", secret)
+            xml.send()
+        }
 
-        UpdateAPI()
-
+        UpdateAPI(global_identifier)
+        setInterval(() => {
+            let current_time = new Date()
+            current_time.setSeconds(current_time.getSeconds() - 10)
+            if (current_time > time_since_loop) {
+                global_identifier++
+                UpdateAPI(global_identifier)
+            }
+        }, 5000)
     </script>
 
 </body>
+
 </html>
