@@ -123,9 +123,19 @@ if (true) {
     }
 
     let refreshToken = function() {
+        if(loading_key.state === true){
+            let current_stamp = new Date()
+            current_stamp.setSeconds(current_stamp.getSeconds() - 10)
+            if (current_stamp < loading_key.timestamp){
+                return
+            }
+        }
+        loading_key.state = true
+        loading_key.timestamp = new Date()
         let xml = new XMLHttpRequest()
         xml.onreadystatechange = () => {
             if (xml.readyState == 4) {
+                loading_key.state = false
                 if (xml.response != '') {
                     xml = JSON.parse(xml.response)
                     if (xml.error_description === 'Invalid refresh token') {
@@ -195,4 +205,5 @@ if (true) {
     window.addEventListener("resize", checkTickers)
 
     let loop_variable = setInterval(newRequest, 2500)
+    let loading_key = {state: false, timestamp:new Date()}
 }
