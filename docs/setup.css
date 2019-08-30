@@ -1,0 +1,18 @@
+body {
+    margin: 0;
+    background: #303030;
+}
+
+h1 {
+    text-align: center;
+    color: #aaaaaa;
+}
+
+#InputURL {
+    box-sizing: border-box;
+    padding: 1rem .5rem;
+    text-align: center;
+    background: #aaaaaa;
+    word-wrap: break-word;
+    font-size: 1.2rem;
+}
