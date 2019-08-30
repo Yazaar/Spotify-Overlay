@@ -10,7 +10,7 @@ let url_params = new URLSearchParams(window.location.search)
 checkTickers()
 
 if (typeof url_params.get('access_token') != 'string' && typeof url_params.get('refresh_token') != 'string' && window.location.hash == '') {
-    window.location = 'http://yazaar.pythonanywhere.com/spotifyAPI/request/' + encodeURIComponent(encodeURIComponent(window.location.origin + window.location.pathname)) + '/user-read-currently-playing'
+    window.location = 'https://yazaar.pythonanywhere.com/spotifyAPI/request/' + encodeURIComponent(encodeURIComponent(window.location.origin + window.location.pathname)) + '/user-read-currently-playing'
 }
 
 if (window.location.search != '') {
@@ -156,7 +156,7 @@ function refreshToken() {
             }
         }
     }
-    xml.open('get', 'http://yazaar.pythonanywhere.com/spotifyAPI/refresh/' + data.refresh_token, true)
+    xml.open('get', 'https://yazaar.pythonanywhere.com/spotifyAPI/refresh/' + data.refresh_token, true)
     xml.setRequestHeader('Authorization', 'Bearer ' + data.access_token)
     xml.send()
 }
