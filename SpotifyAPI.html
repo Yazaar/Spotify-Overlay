@@ -101,7 +101,6 @@
         let current_song = ""
         let RandomColor
 
-        let global_identifier = 0
         let time_since_loop = new Date()
 
         function AskNewToken() {
@@ -170,10 +169,7 @@
             }
         }
 
-        function UpdateAPI(local_identifier) {
-            if (local_identifier !== global_identifier){
-                return
-            }
+        function UpdateAPI() {
             time_since_loop = new Date()
             if (Date.now() > timestamp) {
                 timestamp = Date.now() + 1200000
@@ -190,7 +186,7 @@
                     }
                 }
 
-                xml2.open('get', 'http://yazaar.pythonanywhere.com/spotifyAPI/' + API_Key.refresh_token + '/' +
+                xml2.open('get', 'https://yazaar.pythonanywhere.com/spotifyAPI/' + API_Key.refresh_token + '/' +
                     API_Basic, false)
                 xml2.send()
             }
@@ -203,13 +199,9 @@
                             SpotifyData = JSON.parse(xml.response)
                             ReloadScreenData()
                         }
-                        setTimeout(function(){
-                            UpdateAPI(local_identifier)
-                        }, LoopMS)
+                        setTimeout(UpdateAPI, LoopMS)
                     } else {
-                        setTimeout(function(){
-                            UpdateAPI(local_identifier)
-                        }, LoopMS)
+                        setTimeout(UpdateAPI, LoopMS)
                         AskNewToken()
                         console.log("[ERROR xml] Try to launch SpotifyAPI.exe to get authorized if this repeats.")
                     }
@@ -221,15 +213,7 @@
             xml.send()
         }
 
-        UpdateAPI(global_identifier)
-        setInterval(() => {
-            let current_time = new Date()
-            current_time.setSeconds(current_time.getSeconds() - 10)
-            if (current_time > time_since_loop) {
-                global_identifier++
-                UpdateAPI(global_identifier)
-            }
-        }, 5000)
+        UpdateAPI()
     </script>
 
 </body>
