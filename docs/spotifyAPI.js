@@ -200,6 +200,10 @@ if (true) {
         'refresh_token': url_params.get('refresh_token')
     }
 
+    if (data.access_token === null || data.refresh_token === null) {
+        window.location = window.location.origin + window.location.pathname   
+    }
+
     window.location.hash = ''
 
     window.addEventListener("resize", checkTickers)
