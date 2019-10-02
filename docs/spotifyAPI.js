@@ -14,7 +14,11 @@ if (true) {
                         checkTickers()
                     }
                 } else if (JSON.parse(xml.response).error) {
-                    refreshToken()
+                    if(data.refresh_token === null) {
+                        window.location = window.location.origin + window.location.pathname
+                    } else {
+                        refreshToken()
+                    }
                 } else {
                     updateData(JSON.parse(xml.response))
                 }
@@ -198,10 +202,6 @@ if (true) {
     let data = {
         'access_token': url_params.get('access_token'),
         'refresh_token': url_params.get('refresh_token')
-    }
-
-    if (data.access_token === null || data.refresh_token === null) {
-        window.location = window.location.origin + window.location.pathname   
     }
 
     window.location.hash = ''
