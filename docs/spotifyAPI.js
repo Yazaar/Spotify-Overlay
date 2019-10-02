@@ -51,7 +51,11 @@ if (true) {
             }
         }
         document.getElementById('author').innerHTML = artists
-        document.querySelector('#left img').src = xml.item.album.images[xml.item.album.images.length - 2].url
+        if (xml.item.album.images.length > 0) {
+            document.querySelector('#left img').src = xml.item.album.images[xml.item.album.images.length - 2].url
+        } else {
+            document.querySelector('#left img').src = './blank.png'
+        }
         document.getElementById('time').style.background = generateRGB()
         checkTickers()
     }

@@ -33,6 +33,7 @@ body {
 #left img {
     height: 85vh;
     width: 85vh;
+    margin: 0 0 0 5px;
 }
 
 #title, #author {
