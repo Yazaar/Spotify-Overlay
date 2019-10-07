@@ -7,7 +7,7 @@ This URL can be used for the ones who does not have a software which includes in
 <h2>https://yazaar.github.io/Spotify-API/setup.html</h2>
 
 Choose the width and height of the browser source to your liking.<br>
-Higher = Slower moving text
+Higher = Slower moving text<br>
 Wider = more text displayed at once
 
 <br><br><br>
