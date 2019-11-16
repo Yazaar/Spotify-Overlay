@@ -13,7 +13,7 @@ Higher = Slower moving text<br>
 Wider = more text displayed at once
 
 <br><br><br>
-<h3>Setup guide (download edition, old version):</h3>
+<h3>Setup guide (download edition, old version, NOT RECOMMENTED, NOT SUPPORTED):</h3>
 <strong><em>The app is already deleted, no need to try using my Client ID and Client Secret!</em></strong><br>
 First of all, <a href="https://github.com/Yazaar/Spotify-API/archive/master.zip">download</a> the files<br><br>
 
