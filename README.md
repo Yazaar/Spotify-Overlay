@@ -1,4 +1,5 @@
 # Spotify-API
+<img src="https://raw.githubusercontent.com/Yazaar/Project-Assets/master/SpotifyAPI/preview.png"/>
 <h3>Setup guide (cloud edition, new version)</h3>
 This is the URL for the overlay, open it up as a browser source if your software includes interact. Use the interact function by rightclicking on your browser source to login to your spotify account which you would like to track. I would recommend to drag the browser source out of the streams view while typing in your cridentials. You may exit the interact function when the login process is completed.
 <h2>https://yazaar.github.io/Spotify-API</h2>
