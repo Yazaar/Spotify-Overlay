@@ -175,43 +175,52 @@ if (true) {
         return 'rgb(' + MyColor[0] + ',' + MyColor[1] + ',' + MyColor[2] + ')'
     }
 
-    let title_ticker = {
-        'running': false,
-        'distance': 0,
-        'state': 0,
-        'ticker_object': ''
-    } // data for the title ticker
-    let author_ticker = {
-        'running': false,
-        'distance': 0,
-        'state': 0,
-        'ticker_object': ''
-    } // data for the author ticker
-    let ticker_speed = 40 // changes the speed of the tickers, title and author
-
-    let url_params = new URLSearchParams(window.location.search)
-
-    checkTickers()
-
-    if (typeof url_params.get('access_token') != 'string' && typeof url_params.get('refresh_token') != 'string' && window.location.hash == '') {
-        window.location = 'https://yazaar.pythonanywhere.com/spotifyAPI/request/' + encodeURIComponent(encodeURIComponent(window.location.origin + window.location.pathname)) + '/user-read-currently-playing'
+    let launch = function() {
+        title_ticker = {
+            'running': false,
+            'distance': 0,
+            'state': 0,
+            'ticker_object': ''
+        } // data for the title ticker
+        author_ticker = {
+            'running': false,
+            'distance': 0,
+            'state': 0,
+            'ticker_object': ''
+        } // data for the author ticker
+    
+        ticker_speed = 40 // changes the speed of the tickers, title and author
+    
+        let url_params = new URLSearchParams(window.location.search)
+    
+        if (typeof url_params.get('access_token') != 'string' && typeof url_params.get('refresh_token') != 'string' && window.location.hash == '') {
+            window.location = 'https://yazaar.pythonanywhere.com/spotifyAPI/request/' + encodeURIComponent(encodeURIComponent(window.location.origin + window.location.pathname)) + '/user-read-currently-playing' + window.location.search
+            return
+        }
+    
+        if (window.location.search != '') {
+            window.location = window.location.origin + window.location.pathname + '#' + window.location.search
+            return
+        }
+    
+        url_params = new URLSearchParams(window.location.hash.substr(1))
+    
+        data = {
+            'access_token': url_params.get('access_token'),
+            'refresh_token': url_params.get('refresh_token')
+        }
+    
+        window.location.hash = ''
+    
+        window.addEventListener("resize", checkTickers)
+    
+        loop_variable = setInterval(newRequest, 2500)
+        loading_key = {state: false, timestamp:new Date()}
     }
+    let loading_key
+    let loop_variable
+    let data
+    let ticker_speed
+    launch()
 
-    if (window.location.search != '') {
-        window.location = window.location.origin + window.location.pathname + '#' + window.location.search
-    }
-
-    url_params = new URLSearchParams(window.location.hash.substr(1))
-
-    let data = {
-        'access_token': url_params.get('access_token'),
-        'refresh_token': url_params.get('refresh_token')
-    }
-
-    window.location.hash = ''
-
-    window.addEventListener("resize", checkTickers)
-
-    let loop_variable = setInterval(newRequest, 2500)
-    let loading_key = {state: false, timestamp:new Date()}
 }
