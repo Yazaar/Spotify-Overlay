@@ -1,3 +1,4 @@
+let data
 if (true) {
 
     //JavaScript file to communicate with the spotify API
@@ -155,9 +156,8 @@ if (true) {
                 }
             }
         }
-        xml.open('get', 'https://yazaar.pythonanywhere.com/spotifyAPI/refresh/' + data.refresh_token, true)
-        xml.setRequestHeader('Authorization', 'Bearer ' + data.access_token)
-        xml.send()
+        xml.open('post', 'https://yazaar.pythonanywhere.com/spotifyAPI/refresh', true)
+        xml.send(data.refresh_token)
     }
 
     let generateRGB = function() {
@@ -219,8 +219,6 @@ if (true) {
     }
     let loading_key
     let loop_variable
-    let data
     let ticker_speed
     launch()
-
 }
