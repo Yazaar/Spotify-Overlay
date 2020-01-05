@@ -1,5 +1,6 @@
-let data
 if (true) {
+    let data
+    let currentId
 
     //JavaScript file to communicate with the spotify API
     //JavaScript file to control the spotify overlay
@@ -35,7 +36,8 @@ if (true) {
             return
         }
         document.getElementById('time').style.width = xml.progress_ms / xml.item.duration_ms * 100 + '%'
-        if (document.getElementById('title').innerHTML != xml.item.name) {
+        if (currentId != xml.item.id) {
+            currentId = xml.item.id
             changeData(xml)
         }
     }
