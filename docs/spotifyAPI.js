@@ -136,7 +136,7 @@ if (true) {
     let refreshToken = function() {
         if(loading_key.state === true){
             let current_stamp = new Date()
-            current_stamp.setSeconds(current_stamp.getSeconds() - 10)
+            current_stamp.setSeconds(current_stamp.getSeconds() - 30)
             if (current_stamp < loading_key.timestamp){
                 return
             }
