@@ -15,7 +15,7 @@ if (true) {
         xml.onreadystatechange = () => {
             if (xml.readyState == 4) {
                 if (xml.response == '') {
-                    if (titleElement.innerHTML !== 'Connected to spotify') {
+                    if (titleElement.innerHTML !== 'Connected to spotify' && currentId === undefined) {
                         titleElement.innerHTML = 'Connected to spotify'
                         authorElement.innerHTML = 'Start playing a song to get started'
                         checkTickers()
