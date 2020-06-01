@@ -1,4 +1,9 @@
 if (true) {
+    let titleElement = document.getElementById('title')
+    let authorElement = document.getElementById('author')
+    let timeElement = document.getElementById('time')
+    let imageElement = document.querySelector('#left img')
+    let rightElement = document.getElementById('right')
     let data
     let currentId
 
@@ -10,9 +15,9 @@ if (true) {
         xml.onreadystatechange = () => {
             if (xml.readyState == 4) {
                 if (xml.response == '') {
-                    if (document.getElementById('title').innerHTML !== 'Connected to spotify') {
-                        document.getElementById('title').innerHTML = 'Connected to spotify'
-                        document.getElementById('author').innerHTML = 'Start playing a song to get started'
+                    if (titleElement.innerHTML !== 'Connected to spotify') {
+                        titleElement.innerHTML = 'Connected to spotify'
+                        authorElement.innerHTML = 'Start playing a song to get started'
                         checkTickers()
                     }
                 } else if (JSON.parse(xml.response).error) {
@@ -35,7 +40,7 @@ if (true) {
         if (xml.currently_playing_type != 'track') {
             return
         }
-        document.getElementById('time').style.width = xml.progress_ms / xml.item.duration_ms * 100 + '%'
+        timeElement.style.width = xml.progress_ms / xml.item.duration_ms * 100 + '%'
         if (currentId != xml.item.id) {
             currentId = xml.item.id
             changeData(xml)
@@ -43,7 +48,7 @@ if (true) {
     }
 
     let  changeData = function(xml) {
-        document.getElementById('title').innerHTML = xml.item.name
+        titleElement.innerHTML = xml.item.name
 
         let artists = ''
         for (let i of xml.item.artists) {
@@ -53,35 +58,35 @@ if (true) {
                 artists += ', ' + i.name
             }
         }
-        document.getElementById('author').innerHTML = artists
+        authorElement.innerHTML = artists
         if (xml.item.album.images.length > 0) {
-            document.querySelector('#left img').src = xml.item.album.images[xml.item.album.images.length - 2].url
+            imageElement.src = xml.item.album.images[xml.item.album.images.length - 2].url
         } else {
-            document.querySelector('#left img').src = './blank.png'
+            imageElement.src = './blank.png'
         }
-        document.getElementById('time').style.background = generateRGB()
+        timeElement.style.background = generateRGB()
         checkTickers()
     }
 
     let checkTickers = function() {
-        let title = document.getElementById('title').offsetWidth
-        let author = document.getElementById('author').offsetWidth
-        let right = document.getElementById('right').offsetWidth
+        let title = titleElement.offsetWidth
+        let author = authorElement.offsetWidth
+        let right = rightElement.offsetWidth
 
         // remove old tickers
         if (title_ticker.running === true) {
             clearTimeout(title_ticker.ticker_object)
             title_ticker.running = false
-            document.getElementById('title').style.transition = 'margin-left 0s linear'
-            document.getElementById('title').style.marginLeft = '0'
+            titleElement.style.transition = 'margin-left 0s linear'
+            titleElement.style.marginLeft = '0'
         }
 
         // remove old tickers
         if (author_ticker.running === true) {
             clearTimeout(author_ticker.ticker_object)
             author_ticker.running = false
-            document.getElementById('author').style.transition = 'margin-left 0s linear'
-            document.getElementById('author').style.marginLeft = '0'
+            authorElement.style.transition = 'margin-left 0s linear'
+            authorElement.style.marginLeft = '0'
         }
 
         // add new tickers
@@ -103,15 +108,15 @@ if (true) {
         if (title_ticker.state === 0) {
             title_ticker.state = 1
             let speed = title_ticker.distance / ticker_speed * -1
-            document.getElementById('title').style.transition = 'margin-left ' + speed + 's linear'
-            document.getElementById('title').style.marginLeft = title_ticker.distance + 'px'
+            titleElement.style.transition = 'margin-left ' + speed + 's linear'
+            titleElement.style.marginLeft = title_ticker.distance + 'px'
             title_ticker.ticker_object = setTimeout(titleTicker, speed * 1000 + 2000)
             return
         }
         title_ticker.state = 0
         let speed = title_ticker.distance / ticker_speed * -0.1
-        document.getElementById('title').style.transition = 'margin-left ' + speed + 's linear'
-        document.getElementById('title').style.marginLeft = '0px'
+        titleElement.style.transition = 'margin-left ' + speed + 's linear'
+        titleElement.style.marginLeft = '0px'
         title_ticker.ticker_object = setTimeout(titleTicker, speed * 1000 + 2000)
         return
     }
@@ -120,15 +125,15 @@ if (true) {
         if (author_ticker.state === 0) {
             author_ticker.state = 1
             let speed = author_ticker.distance / ticker_speed * -1
-            document.getElementById('author').style.transition = 'margin-left ' + speed + 's linear'
-            document.getElementById('author').style.marginLeft = author_ticker.distance + 'px'
+            authorElement.style.transition = 'margin-left ' + speed + 's linear'
+            authorElement.style.marginLeft = author_ticker.distance + 'px'
             author_ticker.ticker_object = setTimeout(authorTicker, speed * 1000 + 2000)
             return
         }
         author_ticker.state = 0
         let speed = author_ticker.distance / ticker_speed * -0.1
-        document.getElementById('author').style.transition = 'margin-left ' + speed + 's linear'
-        document.getElementById('author').style.marginLeft = '0px'
+        authorElement.style.transition = 'margin-left ' + speed + 's linear'
+        authorElement.style.marginLeft = '0px'
         author_ticker.ticker_object = setTimeout(authorTicker, speed * 1000 + 2000)
         return
     }
