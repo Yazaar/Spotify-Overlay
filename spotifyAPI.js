@@ -150,9 +150,9 @@ if (true) {
         loading_key.timestamp = new Date()
         let xml = new XMLHttpRequest()
         xml.onreadystatechange = () => {
-            if (xml.readyState == 4) {
+            if (xml.readyState === 4) {
                 loading_key.state = false
-                if (xml.response != '') {
+                if (xml.response !== '') {
                     xml = JSON.parse(xml.response)
                     if (xml.error_description === 'Invalid refresh token') {
                         window.location = 'https://yazaar.pythonanywhere.com/spotifyAPI/request/' + encodeURIComponent(encodeURIComponent(window.location.origin + window.location.pathname)) + '/user-read-currently-playing'
@@ -199,25 +199,35 @@ if (true) {
         ticker_speed = 40 // changes the speed of the tickers, title and author
     
         let url_params = new URLSearchParams(window.location.search)
-    
-        if (typeof url_params.get('access_token') != 'string' && typeof url_params.get('refresh_token') != 'string' && window.location.hash == '') {
+
+        let access_token = url_params.get('access_token')
+        let refresh_token = url_params.get('refresh_token')
+        let modifications = false
+
+        if (access_token !== null) {
+            modifications = true
+            localStorage.setItem('spotify_access_token', access_token)
+        }
+
+        if (refresh_token !== null) {
+            modifications = true
+            localStorage.setItem('spotify_refresh_token', refresh_token)
+        }
+
+        if (modifications === true) {
+            window.location = window.location.origin + window.location.pathname;
+            return
+        }
+
+        data = {
+            'access_token': localStorage.getItem('spotify_access_token'),
+            'refresh_token': localStorage.getItem('spotify_refresh_token')
+        }
+        
+        if (data.access_token === null || data.refresh_token === null) {
             window.location = 'https://yazaar.pythonanywhere.com/spotifyAPI/request/' + encodeURIComponent(encodeURIComponent(window.location.origin + window.location.pathname)) + '/user-read-currently-playing' + window.location.search
             return
         }
-    
-        if (window.location.search != '') {
-            window.location = window.location.origin + window.location.pathname + '#' + window.location.search
-            return
-        }
-    
-        url_params = new URLSearchParams(window.location.hash.substr(1))
-    
-        data = {
-            'access_token': url_params.get('access_token'),
-            'refresh_token': url_params.get('refresh_token')
-        }
-    
-        window.location.hash = ''
     
         window.addEventListener("resize", checkTickers)
     
