@@ -41,6 +41,19 @@ if (true) {
             return
         }
         timeElement.style.width = xml.progress_ms / xml.item.duration_ms * 100 + '%'
+        if (xml.item.is_local === true) {
+            if (xml.item.id === null) {
+                xml.item.id = xml.item.uri;
+            }
+            for (let i = xml.item.artists.length-1; i > -1; i--) {
+                if (xml.item.artists[i].name.length === 0) {
+                    xml.item.artists.splice(i, 1)
+                }
+            }
+            if (xml.item.artists.length === 0) {
+                xml.item.artists = [{name: 'no artist found'}];
+            }
+        }
         if (currentId != xml.item.id) {
             currentId = xml.item.id
             changeData(xml)
@@ -159,6 +172,7 @@ if (true) {
                     }
                     if (typeof xml.access_token == 'string') {
                         data.access_token = xml.access_token
+                        localStorage.setItem('spotify_access_token', data.access_token)
                     }
                 }
             }
