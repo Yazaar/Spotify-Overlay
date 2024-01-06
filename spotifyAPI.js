@@ -256,6 +256,27 @@
     return 'rgb(' + MyColor[0] + ',' + MyColor[1] + ',' + MyColor[2] + ')';
   };
 
+  let argConfig = function (url_params) {
+    let textScale = parseFloat(url_params.get('textScale'));
+    if (!Number.isNaN(textScale)) {
+      titleElement.style.fontSize = (35 * textScale) + 'vh';
+      authorElement.style.fontSize = (25 * textScale) + 'vh';
+    }
+    let imgSize = parseFloat(url_params.get('imgSize'));
+    if (!Number.isNaN(imgSize)) {
+      imageElement.style.width = imgSize + 'vh';
+      imageElement.style.height = imgSize + 'vh';
+    }
+    let roundBox = parseFloat(url_params.get('roundBox'));
+    if (!Number.isNaN(roundBox)) {
+      document.querySelector('#wrapper').style.borderRadius = roundBox + 'px';
+    }
+    let roundImg = parseFloat(url_params.get('roundImg'));
+    if (!Number.isNaN(roundImg)) {
+      imageElement.style.borderRadius = roundImg + 'px';
+    }
+  }
+
   let launch = function () {
     title_ticker = {
       running: false,
@@ -274,11 +295,16 @@
 
     let url_params = new URLSearchParams(window.location.search);
 
+    argConfig(url_params)
+
     data = {
       access_token: localStorage.getItem('spotify_access_token'),
       refresh_token: localStorage.getItem('spotify_refresh_token'),
       txtform_token: url_params.get('token'),
     };
+
+    setTimeout(checkTickers, 2500);
+    window.addEventListener('resize', checkTickers);
 
     if (!data.refresh_token && !data.txtform_token) {
       titleElement.innerText = 'no provided token, read more on GitHub';
@@ -295,7 +321,6 @@
       delete data.refresh_token;
     }
 
-    window.addEventListener('resize', checkTickers);
 
     loop_variable = setInterval(newRequest, 2500);
     loading_key = { state: false, timestamp: new Date() };
