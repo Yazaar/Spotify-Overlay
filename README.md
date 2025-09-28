@@ -8,7 +8,7 @@ Wider = more text displayed at once
 
 <h2>Setup</h2>
 <ol>
-  <li>Head over to <a href="txtform.yazaar.xyz"></a> and login with a Twitch account (does not matter which)</li>
+  <li>Head over to <a href="https://txtform.yazaar.xyz">https://txtform.yazaar.xyz</a> and login with a Twitch account (does not matter which)</li>
   <li>When you are signed in, head to the dashboard and click "connect account", connect your Spotify account</li>
   <li>When your account is connected click "edit" on the connected Spotify account</li>
   <li>Click "Copy account secret"</li>
